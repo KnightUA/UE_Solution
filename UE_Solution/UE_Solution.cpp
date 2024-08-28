@@ -1,7 +1,7 @@
 #include <iostream>
 
-const int MAX_HERO_HEALTH = 100;
-const int MIN_HERO_HEALTH = 0;
+const int MAX_HERO_HEALTH = 1000;
+const int MIN_HERO_HEALTH = 100;
 
 const int MAX_ITEM_DISTANCE = 100;
 const int MIN_ITEM_DISTANCE = 0;
@@ -9,18 +9,35 @@ const int MIN_ITEM_DISTANCE = 0;
 int main(int argc, char* argv[])
 {
     float item_impact, item_distance, result_impact;
-    float health = MAX_HERO_HEALTH;
+    float max_health;
 
-    std::cout << "You have a Hero with health equal " << health << '\n';
+    std::cout << "=====================================================\n";
+    std::cout << "Before start game, please enter Hero's health between " << MIN_HERO_HEALTH << " and " <<
+        MAX_HERO_HEALTH << ": ";
+    std::cin >> max_health;
 
-    while (health > MIN_HERO_HEALTH)
+    while (max_health > MAX_HERO_HEALTH || max_health < MIN_HERO_HEALTH)
     {
-        std::cout << "Please enter an item usage distance between 0 and 100: ";
+        std::cout << "Incorrect value. Hero's health should be between " << MIN_HERO_HEALTH << " and " <<
+            MAX_HERO_HEALTH << ": ";
+        std::cin >> max_health;
+    }
+
+    float health = max_health;
+    std::cout << "=====================================================\n";
+    std::cout << "You have a Hero with health equal " << health << '\n';
+    std::cout << "=====================================================\n";
+    
+    while (health > 0)
+    {
+        std::cout << "Please enter an item usage distance between " << MIN_ITEM_DISTANCE << " and " << MAX_ITEM_DISTANCE
+            << ": ";
         std::cin >> item_distance;
 
         if (item_distance > MAX_ITEM_DISTANCE)
         {
-            std::cout << "The distance is more then 100. Hero won't take any effect from item.\n";
+            std::cout << "The distance is more then " << MAX_ITEM_DISTANCE <<
+                ". Hero won't take any effect from item.\n";
         }
         else if (item_distance < MIN_ITEM_DISTANCE)
         {
@@ -52,13 +69,15 @@ int main(int argc, char* argv[])
                 health = MAX_HERO_HEALTH;
                 std::cout << "Hero can't have health more then " << MAX_HERO_HEALTH << '\n';
             }
-            else if (health < MIN_HERO_HEALTH)
+            else if (health < 0)
             {
-                health = MIN_HERO_HEALTH;
+                health = 0;
             }
         }
 
+        std::cout << "=====================================================\n";
         std::cout << "Hero's health is " << health << '\n';
+        std::cout << "=====================================================\n";
     }
 
     std::cout << "It was nice game, but your Hero is dead\n";
