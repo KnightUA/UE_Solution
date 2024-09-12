@@ -154,7 +154,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Building.cpp" />
     <ClCompile Include="UE_Solution.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Building.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
